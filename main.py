@@ -22,6 +22,19 @@ def get_scores(level):
     db_conn.close()
     return rows
 
+@app.route("/all", methods=["GET"])
+def get_all_scores():
+    sql_read = ''' SELECT time,collectibles,player FROM scores WHERE level=? ORDER BY level DESC, time ASC LIMIT 10'''
+    db_conn = do_db_con()
+    db_cur = db_conn.cursor()
+    result = []
+    for level in range(0,5):
+        db_cur.execute(sql_read, str(level))
+        result.append(db_cur.fetchall())
+    db_conn.close()
+    return result
+
+
 @app.route("/<level>/submit", methods=["POST"])
 def save_score(level):
     sql_save = ''' INSERT INTO scores (level,player,collectibles,time,timestamp) VALUES (?,?,?,?,?) '''
