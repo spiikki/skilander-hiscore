@@ -1,10 +1,44 @@
 # Skilander HiScore API
 # 2024 hemohespiikki of hiihtoliitto
 
-from fastapi import FastAPI
+from datetime import datetime
+from flask import Flask, jsonify, request
+import sqlite3
+from sqlite3 import Error
 
-app = FastAPI()
+app = Flask(__name__)
 
 @app.get("/")
-def read_root():
-    return {"message": "success"}
+def root():
+    return "vote for seppo!"
+
+@app.route("/<level>", methods=["GET"])
+def get_scores(level):
+    sql_read = ''' SELECT time,collectibles,player FROM scores WHERE level=? ORDER BY time ASC LIMIT 10'''
+    db_conn = do_db_con()
+    db_cur = db_conn.cursor()
+    db_cur.execute(sql_read, level)
+    rows = db_cur.fetchall()
+    db_conn.close()
+    return rows
+
+@app.route("/<level>/submit", methods=["POST"])
+def save_score(level):
+    sql_save = ''' INSERT INTO scores (level,player,collectibles,time,timestamp) VALUES (?,?,?,?,?) '''
+    data = request.get_json()
+    db_conn = do_db_con()
+    db_cur = db_conn.cursor()
+    db_cur.execute(sql_save, (level, data[2], data[1], data[0], datetime.now()))
+    db_conn.commit()
+    db_conn.close()
+    return data
+
+def do_db_con():
+    try:
+        db_conn = sqlite3.connect(r"./database/ski.db")
+        return db_conn
+    except Error as e:
+        print(e)
+
+if __name__=="__main__":
+    app.run(debug=True, host="0.0.0.0",port=80)

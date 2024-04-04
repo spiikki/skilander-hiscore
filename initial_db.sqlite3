@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS scores (
+    id integer PRIMARY KEY AUTOINCREMENT,
+    level integer NOT NULL,
+    player text NOT NULL,
+    collectibles real NOT NULL,
+    time real NOT NULL,
+    api_key text,
+    timestamp text
+);
