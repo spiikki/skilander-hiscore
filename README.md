@@ -27,3 +27,25 @@ Body application/json:
 ```
 
 Table consist of time, collectibles percentage, initials.
+
+### POST /user
+Body application/json:
+
+```
+{
+    "username": "username",
+    "password": "password",
+    "initials": "INI"
+}
+```
+
+If user exists and password matches, user data is returned
+
+```
+{
+    "user_id": "user_id",
+    "initials": "INI"
+}
+```
+
+else new user is created and similar result is returned.

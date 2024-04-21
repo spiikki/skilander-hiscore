@@ -8,13 +8,11 @@ CREATE TABLE IF NOT EXISTS scores (
     timestamp text
 );
 
-INSERT INTO scores (user_id, level, player, collectibles, time) VALUES (1, 0, "SPK", 33.333333, 60.111222);
-INSERT INTO scores (user_id, level, player, collectibles, time) VALUES (2, 1, "MKL", 33.333333, 50.111222);
-INSERT INTO scores (user_id, level, player, collectibles, time) VALUES (1, 2, "SPK", 33.333333, 60.111222);
-INSERT INTO scores (user_id, level, player, collectibles, time) VALUES (2, 0, "MKL", 33.333333, 70.111222);
-INSERT INTO scores (user_id, level, player, collectibles, time) VALUES (1, 1, "SPK", 33.333333, 60.111222);
-INSERT INTO scores (user_id, level, player, collectibles, time) VALUES (2, 2, "MKL", 33.333333, 40.111222);
-INSERT INTO scores (user_id, level, player, collectibles, time) VALUES (1, 0, "SPK", 33.333333, 60.111222);
-INSERT INTO scores (user_id, level, player, collectibles, time) VALUES (2, 1, "MKL", 33.333333, 30.111222);
-INSERT INTO scores (user_id, level, player, collectibles, time) VALUES (1, 2, "SPK", 33.333333, 60.111222);
-INSERT INTO scores (user_id, level, player, collectibles, time) VALUES (2, 0, "MKL", 33.333333, 90.111222);
+CREATE TABLE IF NOT EXISTS users (
+    id text PRIMARY KEY,
+    username text NOT NULL,
+    password text NOT NULL,
+    initials text,
+    timestamp text
+);
+
