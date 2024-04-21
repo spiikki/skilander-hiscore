@@ -19,23 +19,11 @@ Returns 10 best scores to level. Level is value from 0 to 4
 
 Return 10 best scores for all levels
 
-### POST /*level*/submit
+### POST /*level*/submit/*user_id*
 Body application/json:
 
 ```
-[ 1, 0.000000, 0.000000, "SPK" ]
+[ 0.000000, 0.000000, "SPK" ]
 ```
 
-Table consist of user_id, time, collectibles percentage, initials.
-
-### POST /*user_id*/hiscores
-Body application/json:
-```
-[                                                               # full score list
-    [                                                           # level 0
-        [                                                       # a score
-            user_id, time, collectibles percentage, initials
-        ]
-    ]
-]
-```
+Table consist of time, collectibles percentage, initials.

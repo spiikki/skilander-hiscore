@@ -34,14 +34,13 @@ def get_all_scores():
     db_conn.close()
     return result
 
-
-@app.route("/<level>/submit", methods=["POST"])
-def save_score(level):
-    sql_save = ''' INSERT INTO scores (user_id, level, player, collectibles, time, timestamp) VALUES (?,?,?,?,?,?) '''
+@app.route("/<level>/submit/<user_id>", methods=["POST"])
+def save_score(level, user_id):
+    sql_save = ''' INSERT INTO scores (user_id, level, player, collectibles, time, timestamp) VALUES (?,?,?,?,?) '''
     data = request.get_json()
     db_conn = do_db_con()
     db_cur = db_conn.cursor()
-    db_cur.execute(sql_save, (data[0], level, data[3], data[2], data[1], datetime.now()))
+    db_cur.execute(sql_save, (user_id, level, data[2], data[1], data[0], datetime.now()))
     db_conn.commit()
     db_conn.close()
     return data
