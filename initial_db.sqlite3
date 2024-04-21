@@ -16,3 +16,4 @@ CREATE TABLE IF NOT EXISTS users (
     timestamp text
 );
 
+INSERT INTO users (id, username, password, initials, timestamp) VALUES ("f9512445c067d802bd433f55fa4b6784", "seppo of hiihtoliitto", "seponpassu","SEP","2024-04-21 22:40:43.794614");
