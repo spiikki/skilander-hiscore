@@ -21,6 +21,21 @@ Return 10 best scores for all levels
 
 ### POST /*level*/submit
 Body application/json:
-[ 0.000000, 0.000000, "SPK" ]
 
-Table consist of time, collectibles percentage, player name.
+```
+[ 1, 0.000000, 0.000000, "SPK" ]
+```
+
+Table consist of user_id, time, collectibles percentage, initials.
+
+### POST /*user_id*/hiscores
+Body application/json:
+```
+[                                                               # full score list
+    [                                                           # level 0
+        [                                                       # a score
+            user_id, time, collectibles percentage, initials
+        ]
+    ]
+]
+```

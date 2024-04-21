@@ -6,3 +6,8 @@ services:
       dockerfile: dockerfile.server
     ports:
       - "1337:80"
+    volumes:
+      - "db:/app/database"
+
+volumes:
+  db:
