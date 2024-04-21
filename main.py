@@ -14,7 +14,7 @@ def root():
 
 @app.route("/<level>", methods=["GET"])
 def get_scores(level):
-    sql_read = ''' SELECT user_id,time,collectibles,player FROM scores WHERE level=? ORDER BY time ASC LIMIT 10'''
+    sql_read = ''' SELECT time,collectibles,player FROM scores WHERE level=? ORDER BY time ASC LIMIT 10'''
     db_conn = do_db_con()
     db_cur = db_conn.cursor()
     db_cur.execute(sql_read, level)
@@ -24,7 +24,7 @@ def get_scores(level):
 
 @app.route("/all", methods=["GET"])
 def get_all_scores():
-    sql_read = ''' SELECT user_id,time,collectibles,player FROM scores WHERE level=? ORDER BY level DESC, time ASC LIMIT 10'''
+    sql_read = ''' SELECT time,collectibles,player FROM scores WHERE level=? ORDER BY level DESC, time ASC LIMIT 10'''
     db_conn = do_db_con()
     db_cur = db_conn.cursor()
     result = []
@@ -45,10 +45,6 @@ def save_score(level):
     db_conn.commit()
     db_conn.close()
     return data
-
-@app.route("/<user_id>/hiscores", methods=["POST"])
-def save_hiscore(user_id):
-    pass
 
 def do_db_con():
     try:
